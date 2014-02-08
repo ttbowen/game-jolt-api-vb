@@ -111,6 +111,13 @@ Public Class GJ_Achievement
         End Get
     End Property
 
+    ' *** Check if user is logged in ***
+    Public ReadOnly Property isLoggedIn() As Boolean
+        Get
+            Return GJ_isLoggedIn
+        End Get
+    End Property
+
     ' *** Users ****************************************
     ' All the functions related to users are found below
     ' **************************************************
@@ -198,9 +205,9 @@ Public Class GJ_Achievement
         Dim Signature As String
         user_URL_temp = GJ_URL & "/users/auth/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
             & "&" & "user_token=" & GJ_Token & GJ_private_key
-			
-		GJ_Signature = user_URL_temp
-		
+
+        GJ_Signature = user_URL_temp
+
         Signature = GetSignature()
 
         user_URL = GJ_URL & "/users/auth/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
@@ -222,11 +229,10 @@ Public Class GJ_Achievement
 
         Dim response As String = streamRd.ReadToEnd()
 
-        If InStr(response, "success:" & "true") = 1 Then
+        If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             openSession()
             Return True
         Else
-            MsgBox("Could not authenticate user")
             Return False
         End If
 
@@ -309,11 +315,11 @@ Public Class GJ_Achievement
 
         Dim response As String = streamRd.ReadToEnd()
 
-        If InStr(response, "success:" & "true") = 1 Then
+        If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             GJ_isActive = True
         Else
+            MsgBox(response)
             GJ_Logout()
-            MsgBox("error" & response)
         End If
 
         Return response
@@ -344,7 +350,7 @@ Public Class GJ_Achievement
 
         Dim response As String = streamRd.ReadToEnd()
 
-        If InStr(response, "success:" & "true") = 1 Then
+        If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             GJ_Logout()
             GJ_isActive = False
         End If
@@ -390,49 +396,90 @@ Public Class GJ_Achievement
 
     End Function
 
-    ' *** Only use this fetchTrophyURL when you wish to fetch trophies by ID or all trophies ***
-    ' To use this function just type the list of trophies you wish to return by ID or leave as nothing to return all trophies
+    ' *** This is an overloaded function, which you use when you want to fetch all game trophies ***
+    Public Function fetchTrophyURL()
+        Dim trophy_URL_temp As String
+        Dim trophy_URL As String
+        Dim Signature As String
+
+        trophy_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+            & "&" & "user_token=" & GJ_Token & GJ_private_key
+        GJ_Signature = trophy_URL_temp
+
+        Signature = GetSignature()
+
+        trophy_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+            & "&" & "user_token=" & GJ_Token & "&" & "signature=" & Signature
+
+        Return trophy_URL
+    End Function
+
+    ' *** Only use this fetchTrophyURL when you wish to fetch a list of trophies by ID  ***
+    ' To use this function just type the list of trophies you wish to return by ID 
     ' Note: You do not need to call this function, this returns the URL for "fetchTrophy"
-    Public Function fetchTrophyURL(ByVal trophyID As List(Of String)) As String
+    Public Function fetchTrophyURL(ByVal trophyID As List(Of Integer)) As String
         Dim trophy_URL_temp As String
         Dim trophy_URL As String
         Dim url_part As String
         Dim Signature As String
         Dim tr As String
-        ' If there are no arguments, leave optional parameters out 
-        If trophyID Is Nothing Then
-            trophy_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-                    & "&" & "user_token=" & GJ_Token & GJ_private_key
-            GJ_Signature = trophy_URL_temp
 
-            Signature = GetSignature()
+        trophy_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+                  & "&" & "user_token=" & GJ_Token
 
-            trophy_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-                 & "&" & "user_token=" & GJ_Token & "&" & "signature=" & Signature
-        Else
-            trophy_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-                   & "&" & "user_token=" & GJ_Token
-            ' If there is more than one ID to be returned
-            url_part = "&" & "trophy_id="
-            For Each tr In trophyID
-                url_part += tr & ","
-            Next
-            tr = url_part.Substring(0, url_part.Count() - 1)
+        url_part = "&" & "trophy_id="
+        For Each tr In trophyID
+            url_part += tr & ","
+        Next
+        tr = url_part.Substring(0, url_part.Count() - 1)
 
-            url_part += GJ_private_key
-            trophy_URL_temp += url_part
-            GJ_Signature = trophy_URL_temp
+        url_part += GJ_private_key
+        trophy_URL_temp += url_part
+        GJ_Signature = CStr(trophy_URL_temp)
 
-            Signature = GetSignature()
+        Signature = GetSignature()
 
-            trophy_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-                   & "&" & "user_token=" & GJ_Token & "&" & "signature=" & Signature
-        End If
+        trophy_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+                  & "&" & "user_token=" & GJ_Token & "&" & "signature=" & Signature
+
         Return trophy_URL
     End Function
 
-    ' *** Use this function to fetch a trophy from the game ***
-    Public Function fetchTrophy(ByVal value As Object) 'Define the type, Object is the default. Fixed types are not recommended. 
+    ' *** This is an overloaded method used to fetch a trophy by ID ***
+    Public Function fetchTrophyURL(ByVal trophyID As Integer)
+        Dim trophy_URL_temp As String
+        Dim trophy_URL As String
+        Dim Signature As String
+
+        trophy_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+            & "&" & "user_token=" & GJ_Token & "&" & "trophy_id=" & trophyID & GJ_private_key
+        GJ_Signature = trophy_URL_temp
+
+        Signature = GetSignature()
+
+        trophy_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
+            & "&" & "user_token=" & GJ_Token & "&" & "trophy_id=" & trophyID & "&" & "signature=" & Signature
+
+        Return trophy_URL
+    End Function
+
+    ' *** Use this function to fetch all trophies
+    Public Function fetchTrophy()
+        Dim handleRequest As WebRequest
+        handleRequest = WebRequest.Create(fetchTrophyURL())
+
+        Dim stream As Stream
+        stream = handleRequest.GetResponse.GetResponseStream()
+
+        Dim streamRd As New StreamReader(stream)
+
+        Dim response As String = streamRd.ReadToEnd()
+
+        Return response
+    End Function
+
+    ' *** Use this function to fetch a trophy from the game by ID or whether achieved or not ***
+    Public Function fetchTrophy(ByVal value As Object) 'Define the type, Object is the default. 
         Dim handleRequest As WebRequest
         handleRequest = WebRequest.Create(fetchTrophyURL(value))
 
@@ -453,13 +500,13 @@ Public Class GJ_Achievement
         Dim trophy_URL As String
         Dim Signature As String
         trophy_URL_temp = GJ_URL & "/trophies/add-achieved/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-            & "&" & "user_token=" & GJ_Token & "&" & trophy_ID & GJ_private_key
+            & "&" & "user_token=" & GJ_Token & "&" & "trophy_id=" & CStr(trophy_ID) & GJ_private_key
         GJ_Signature = trophy_URL_temp
 
         Signature = GetSignature()
 
         trophy_URL = GJ_URL & "/trophies/add-achieved/?game_id=" & CStr(GJ_gameID) & "&" & "username=" & GJ_UserName _
-            & "&" & "user_token=" & GJ_Token & "&" & "signature=" & Signature
+            & "&" & "user_token=" & GJ_Token & "&" & "trophy_id=" & CStr(trophy_ID) & "&" & "signature=" & Signature
         Return trophy_URL
     End Function
 
@@ -476,11 +523,10 @@ Public Class GJ_Achievement
 
         Dim response As String = streamRd.ReadToEnd()
 
-        If InStr(response, "success:" & "true") = 1 Then
+        If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             Return True
         Else
             Return False
-            MsgBox("error:" & response)
         End If
     End Function
 
@@ -557,24 +603,28 @@ Public Class GJ_Achievement
         Dim score_URL As String
         Dim Signature As String
 
-        score_URL_temp = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "score=" & score & "&" _
-            & "sort=" & sort
+        score_URL_temp = GJ_URL & "/scores/add/?game_id=" & CStr(GJ_gameID) & "&" & "score=" & CStr(score) & "&" _
+            & "sort=" & CStr(sort)
 
-        score_URL = GJ_URL & "/trophies/?game_id=" & CStr(GJ_gameID) & "&" & "score=" & score & "&" _
-           & "sort=" & sort
+        score_URL = GJ_URL & "/scores/add/?game_id=" & CStr(GJ_gameID) & "&" & "score=" & CStr(score) & "&" _
+           & "sort=" & CStr(sort)
 
         If Guest = False Then ' If the user is not a guest, use GJ account information
-            score_URL_temp += "&" & "username=" & GJ_UserName & "&" & "token=" & GJ_Token
+            score_URL_temp += "&" & "username=" & GJ_UserName & "&" & "user_token=" & GJ_Token
+            score_URL += "&" & "username=" & GJ_UserName & "&" & "user_token=" & GJ_Token
         Else
             score_URL_temp += "&" & "guest=" & Guest
+            score_URL += "&" & "guest=" & Guest
         End If
         ' Check for any extra data
         If extraData <> "" Then
             score_URL_temp += "&" & "extra_data=" & extraData
+            score_URL += "&" & "extra_data=" & extraData
         End If
         ' Add scores to a specific table in your game
         If tableID <> 0 Then
             score_URL_temp += "&" & "table_id=" & CStr(tableID)
+            score_URL += "&" & "table_id=" & CStr(tableID)
         End If
         score_URL_temp += GJ_private_key
         GJ_Signature = score_URL_temp
@@ -809,11 +859,11 @@ Public Class GJ_Achievement
 
         Dim response As String = streamRd.ReadToEnd()
 
-        If InStr(response, "success:" & "true") = 1 Then
+        If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             Return True
         Else
             Return False
-            MsgBox("error:" & response)
+            MsgBox(response)
         End If
     End Function
 
