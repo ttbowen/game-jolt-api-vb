@@ -45,6 +45,16 @@ Contents
 
 Game sessions/Users
 =============
+fetchUser(ByVal users As List(Of String), ByVal user As Integer)
+===
+  - authenticateUser()
+  - GJ_Logout()
+  - pingSession(ByVal status As Boolean)
+  - openSession()
+  - closeSession
+  - setUserType(ByVal user As user_type)
+  - getUserType()
+
 
 Getters/Setters
 =============
