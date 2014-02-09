@@ -43,5 +43,7 @@ Contents
 6. miscellaneous 
   - New(ByVal private_key As String, ByVal gameID As Integer)
 
-Game sessions/Authentication
+Game sessions/Users
 =============
+
+Getters/Setters
