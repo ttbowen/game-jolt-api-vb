@@ -40,10 +40,19 @@ Contents
   - removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)
   - getKeysDataStorage(ByVal userInfo As Boolean) As Boolean
 
-6. miscellaneous 
+6. Miscellaneous 
   - New(ByVal private_key As String, ByVal gameID As Integer)
 
 Game sessions/Users
 =============
 
 Getters/Setters
+=============
+Trophies
+=============
+Highscores
+=============
+Data storage
+=============
+Miscellaneous
+=============
