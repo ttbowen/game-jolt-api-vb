@@ -46,14 +46,28 @@ Contents
 Game sessions/Users
 =============
 fetchUser(ByVal users As List(Of String), ByVal user As Integer)
-===
-  - authenticateUser()
-  - GJ_Logout()
-  - pingSession(ByVal status As Boolean)
-  - openSession()
-  - closeSession
-  - setUserType(ByVal user As user_type)
-  - getUserType()
+
+1. authenticateUser()
+This function authenticates the user with the user's credentials and opens a new game session if successful. This function returns a  boolean value,  true if credentials are valid and false if they are not.
+
+
+2. GJ_Logout()
+This sub logs the user out of the current session and resets the user's username and token. Call this at the point where you need to log the user out.
+
+3. pingSession(ByVal status As Boolean)
+This function pings an open session to test if the user is still active or not. This function takes 1 argument called "status" a boolean type, assign false to this "status" if the user is idle and true if the user is active.
+If you do not call this function, within 120 seconds the session will automatically close, so it is recommended that you call this function every 30 seconds. A string type is returned from this function - the API response.
+
+4. openSession()
+This function opens a new session once the user has been successfully authenticated. Note: This function will have been called at least once, if you have already called the "authenticateUser()" function. A string type is returned from this function - the API response.
+
+5. closeSession()
+This function closes an open session with the user, which is also called when you call the "GJ_Logout()" subroutine. A string type is returned from this function - the API response. 
+
+6. setUserType(ByVal user As user_type)
+
+
+7. getUserType()
 
 
 Getters/Setters
