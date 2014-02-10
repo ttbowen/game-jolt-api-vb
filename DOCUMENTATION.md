@@ -5,7 +5,7 @@ Gamejolt API with VB.net. This document will help you to use all of the function
 
 Contents
 =============
-1. Game sessions/Users
+1. *Game sessions/Users*
   - fetchUser(ByVal users As List(Of String), ByVal user As Integer)
   - authenticateUser()
   - GJ_Logout()
@@ -15,7 +15,7 @@ Contents
   - setUserType(ByVal user As user_type)
   - getUserType()
 
-2. Getters/Setters
+2. *Getters/Setters*
   - SetUserName()
   - SetToken()  
   - getUserName()
@@ -23,51 +23,52 @@ Contents
   - getGameID()
   - isLoggedIn()
 
-3. Trophies
+3. *Trophies*
   - fetchTrophy()
   - fetchTrophy(ByVal value As Object)
   - add_TrophyAchieve(ByVal trophyID As Integer)
 
-4. Highscores
+4. *Highscores*
   - fetchScores(ByVal userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)
   - addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal     tableID As Integer)
   - fetchTables()
   - setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)
 
-5. Data storage
+5. *Data storage*
   - fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)
   - setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)
   - removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)
   - getKeysDataStorage(ByVal userInfo As Boolean) As Boolean
 
-6. Miscellaneous 
+6. *Miscellaneous*
   - New(ByVal private_key As String, ByVal gameID As Integer)
 
 Game sessions/Users
 =============
-fetchUser(ByVal users As List(Of String), ByVal user As Integer)
+1. **fetchUser(ByVal users As List(Of String), ByVal user As Integer)** -
+This function is used to fetch Gamejolt user data. The first argument takes a string list type, which you use if you want to fetch more than one user. The second argument takes a single user ID, which you use if you want to fetch data about a single user.
 
-1. **authenticateUser()** -
-This function authenticates the user with the user's credentials and opens a new game session if successful. This function returns a  boolean value,  true if credentials are valid and false if they are not.
+2. **authenticateUser()** -
+This function authenticates the user with the user's credentials and opens a new game session if successful. This function returns a  boolean value,  true if credentials are valid and false if they are not. A string type is returned from this function - the API response.
 
 
-2. **GJ_Logout()** -
+3. **GJ_Logout()** -
 This sub logs the user out of the current session and resets the user's username and token. Call this at the point where you need to log the user out.
 
-3. **pingSession(ByVal status As Boolean)**
+4. **pingSession(ByVal status As Boolean)**
 This function pings an open session to test if the user is still active or not. This function takes 1 argument called "status" a boolean type, assign false to this "status" if the user is idle and true if the user is active.
 If you do not call this function, within 120 seconds the session will automatically close, so it is recommended that you call this function every 30 seconds. A string type is returned from this function - the API response.
 
-4. **openSession()** -
+5. **openSession()** -
 This function opens a new session once the user has been successfully authenticated. Note: This function will have been called at least once, if you have already called the "authenticateUser()" function. A string type is returned from this function - the API response.
 
-5. **closeSession()** -
+6. **closeSession()** -
 This function closes an open session with the user, which is also called when you call the "GJ_Logout()" subroutine. A string type is returned from this function - the API response. 
 
-6. setUserType(ByVal user As user_type)
+7. setUserType(ByVal user As user_type) 
 
 
-7. getUserType()
+8. getUserType()
 
 
 Getters/Setters
