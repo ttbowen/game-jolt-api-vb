@@ -55,7 +55,7 @@ This function authenticates the user with the user's credentials and opens a new
 3. **GJ_Logout()** -
 This sub logs the user out of the current session and resets the user's username and token. Call this at the point where you need to log the user out.
 
-4. **pingSession(ByVal status As Boolean)**
+4. **pingSession(ByVal status As Boolean)** -
 This function pings an open session to test if the user is still active or not. This function takes 1 argument called "status" a boolean type, assign false to this "status" if the user is idle and true if the user is active.
 If you do not call this function, within 120 seconds the session will automatically close, so it is recommended that you call this function every 30 seconds. A string type is returned from this function - the API response.
 
@@ -65,19 +65,57 @@ This function opens a new session once the user has been successfully authentica
 6. **closeSession()** -
 This function closes an open session with the user, which is also called when you call the "GJ_Logout()" subroutine. A string type is returned from this function - the API response. 
 
-7. setUserType(ByVal user As user_type) 
+7. **setUserType(ByVal user As user_type)** -
+This is a setter property used to set the user type, which will be one of the following: "User", "Developer", "Moderator" and "Admin"; the types are numbered 1-4. You can set the argument to one of these types.
 
-
-8. getUserType()
-
+8. **getUserType()** -
+This is a getter property used to get the user type, which is set using the "userUserType" property.
 
 Getters/Setters
 =============
+1. **SetUserName()** -
+
+
+2. **SetToken()** - 
+
+
+3. **getUserName()** -
+
+
+4. **getToken()** -
+
+
+5. **getGameID()** -
+
+
+6. **isLoggedIn()** -
+
+
 Trophies
 =============
+1. **fetchTrophy()** -
+
+2. **fetchTrophy(ByVal value As Object)** -
+
+3. **add_TrophyAchieve(ByVal trophyID As Integer)** -
+
 Highscores
 =============
+1. **fetchScores(ByVa*l userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)**
+
+2. **addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal tableID As Integer)**
+
+3. **fetchTables()**
+
+4. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)**
+
 Data storage
 =============
+1. **fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+2. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)** -
+3. **removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+4. **getKeysDataStorage(ByVal userInfo As Boolean) As Boolean** -
+
 Miscellaneous
 =============
+1. **New(ByVal private_key As String, ByVal gameID As Integer)** -
