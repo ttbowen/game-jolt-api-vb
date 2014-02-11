@@ -100,18 +100,18 @@ This function is used to fetch trophies within the game. By using this function,
 This is an overloaded function of "fetchTrophy()" which is used to fetch trophies within the game. This function will accept 1 argument. If you assign True to this argument it will return all achieved trophies in the game and if you assign False it will return all unachieved trophies instead. And if you assign the trophy ID - Integer number then that particular trophy will be returned.  A string type is returned from this function - the API response.
 
 3. **add_TrophyAchieve(ByVal trophyID As Integer)** -
-This function achieves a trophy for the user playing the game. To use this function you just pass the trophy ID you wish to be achieved into it's only argument "trophyID".
+This function achieves a trophy for the user playing the game. To use this function you just pass the trophy ID you wish to be achieved into it's only argument "trophyID". This function will return a boolean value, True if the trophy was successfully added and false if there was an error trying to add the trophy, or if it is already achieved by the user.
 
 Highscores
 =============
-1. **fetchScores(ByVal userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)**
-This function fetches scores from a specified leaderboard. This function takes 3 arguments "userInfo" which takes a boolean value, "limit" whih takes an integer value and "tableID" which also takes an Integer value type. If ou wish to only fetch scores, achieved by GJ users then assign True to the first argument, else this is false. The second argument will define how many scores you wish to fetch, just enter the umber of scores you wih to fetch; 100 is the limit to this. And for the third argument enter the table ID for where you wish to fetch the scores from; 0 will set this to the primary table.
+1. **fetchScores(ByVal userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)** -
+This function fetches scores from a specified leaderboard. This function takes 3 arguments "userInfo" which takes a boolean value, "limit" whih takes an integer value and "tableID" which also takes an Integer value type. If ou wish to only fetch scores, achieved by GJ users then assign True to the first argument, else this is false. The second argument will define how many scores you wish to fetch, just enter the umber of scores you wih to fetch; 100 is the limit to this. And for the third argument enter the table ID for where you wish to fetch the scores from; 0 will set this to the primary table. A string type is returned from this function - the API response.
 
-2. **addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal tableID As Integer)**
+2. **addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal tableID As Integer)** -
+This function adds scores to a specified leaderboard achieved by users playing your game. This function takes 5 arguments which are "score", "sort", "Guest", "extraData" and "tableID". The first argument you assign an Integer value to it, which will be the current score for the player. For the second argument you assign the sort number, the numerical value associated with the current score; this argument is an Integer type. The third argument you assign a boolean value to specify whether the user is a GJ user or guest; True for users and False for guests. The fouth argument is just any extra extra data you wish to store as a String, to be accessed by the API, this is not required. And for the final argument you assign the table ID of where you wish to store the score; this argument is an Integer type. A string type is returned from this function - the API response.
 
 3. **fetchTables()**
-
-4. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)**
+This function returns a list of tables for a game and the tables information. A string type is returned from this function - the API response.
 
 Data storage
 =============
@@ -126,3 +126,4 @@ Data storage
 Miscellaneous
 =============
 1. **New(ByVal private_key As String, ByVal gameID As Integer)** -
+
