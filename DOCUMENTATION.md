@@ -28,7 +28,7 @@ Contents
   - fetchTrophy(ByVal value As Object)
   - add_TrophyAchieve(ByVal trophyID As Integer)
 
-4. **Highscores*
+4. **Highscores**
   - fetchScores(ByVa*l userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)
   - addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal     tableID As Integer)
   - fetchTables()
@@ -74,22 +74,22 @@ This is a getter property used to get the user type, which is set using the "use
 Getters/Setters
 =============
 1. **SetUserName()** -
-
+This is a write only property used to set the user's username. This will be used to authenticate the user. 
 
 2. **SetToken()** - 
-
+This is a write only property used to set the user's token. This will be used to authenticate the user, along with the username. 
 
 3. **getUserName()** -
-
+This is a read only property used to get the user's username.
 
 4. **getToken()** -
-
+This is a read only property used to get the user's token.
 
 5. **getGameID()** -
-
+This is a read only property used to get the game ID.
 
 6. **isLoggedIn()** -
-
+This is a read only property that is used to to check whether the user is currently signed in and in a session with their credentials.
 
 Trophies
 =============
@@ -112,8 +112,11 @@ Highscores
 Data storage
 =============
 1. **fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+
 2. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)** -
+
 3. **removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+
 4. **getKeysDataStorage(ByVal userInfo As Boolean) As Boolean** -
 
 Miscellaneous
