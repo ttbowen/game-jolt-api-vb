@@ -32,7 +32,6 @@ Contents
   - fetchScores(ByVa*l userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)
   - addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal     tableID As Integer)
   - fetchTables()
-  - setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)
 
 5. **Data storage**
   - fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)
@@ -116,6 +115,7 @@ This function returns a list of tables for a game and the tables information. A 
 Data storage
 =============
 1. **fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+This function is used  to fetch various data stored by your game, onto the Game Jolt data storing servers. This function takes 2 arguments which are "key" and "userInfo". The first argument takes a string value which is the key of the data item you would like to fetch. And the second argument takes a boolean to specify whether to collect user specific information or not, True for user information, and False for not fetching user info.
 
 2. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)** -
 
@@ -126,4 +126,6 @@ Data storage
 Miscellaneous
 =============
 1. **New(ByVal private_key As String, ByVal gameID As Integer)** -
+This is the class constructor that takes 2 arguments. The first argument you assign a string value, whih is the private key for your game. The private key can be found at Game Jolt by going to "Dashboard" -> "Manage Your Games" then by clicking the game you are adding achievements and then "Achievements". Your private key should be on this page, under "Game info". And for the second argument you assign the game ID for you game found above your private key; makee sure this is an Integer value. This will be called first and set the following properties/class variables to their defaults, these are: GJ_private_key, GJ_gameID , GJ_UserName, GJ_Token, GJ_isActive, GJ_isLoggedIn, GJ_achieved.
+
 
