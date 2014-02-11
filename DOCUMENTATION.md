@@ -97,7 +97,7 @@ Trophies
 This function is used to fetch trophies within the game. By using this function, you will return all trophies for your game. A string type is returned from this function - the API response. 
 
 2. **fetchTrophy(ByVal value As Object)** -
-This is an overloaded function of "fetchTrophy()" which is used to fetch trophies within the game. This function will accept one argument. If you assign True to this argument it will return all achieved trophies in the game and if you assign False it will return all unachieved trophies instead. And if you assign the trophy ID - Integer number then that particular trophy will be returned.  A string type is returned from this function - the API response.
+This is an overloaded function of "fetchTrophy()" which is used to fetch trophies within the game. This function will accept 1 argument. If you assign True to this argument it will return all achieved trophies in the game and if you assign False it will return all unachieved trophies instead. And if you assign the trophy ID - Integer number then that particular trophy will be returned.  A string type is returned from this function - the API response.
 
 3. **add_TrophyAchieve(ByVal trophyID As Integer)** -
 This function achieves a trophy for the user playing the game. To use this function you just pass the trophy ID you wish to be achieved into it's only argument "trophyID".
@@ -105,7 +105,7 @@ This function achieves a trophy for the user playing the game. To use this funct
 Highscores
 =============
 1. **fetchScores(ByVal userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)**
-
+This function fetches scores from a specified leaderboard. This function takes 3 arguments "userInfo" which takes a boolean value, "limit" whih takes an integer value and "tableID" which also takes an Integer value type. If ou wish to only fetch scores, achieved by GJ users then assign True to the first argument, else this is false. The second argument will define how many scores you wish to fetch, just enter the umber of scores you wih to fetch; 100 is the limit to this. And for the third argument enter the table ID for where you wish to fetch the scores from; 0 will set this to the primary table.
 
 2. **addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal tableID As Integer)**
 
