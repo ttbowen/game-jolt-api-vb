@@ -115,17 +115,18 @@ This function returns a list of tables for a game and the tables information. A 
 Data storage
 =============
 1. **fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
-This function is used  to fetch various data stored by your game, onto the Game Jolt data storing servers. This function takes 2 arguments which are "key" and "userInfo". The first argument takes a string value which is the key of the data item you would like to fetch. And the second argument takes a boolean to specify whether to collect user specific information or not, True for user information, and False for not fetching user info.
+This function is used  to fetch various data stored by your game, onto the Game Jolt data storing servers. This function takes 2 arguments which are "key" and "userInfo". The first argument takes a string value which is the key of the data item you would like to fetch. And the second argument takes a boolean to specify whether to collect user specific information or not, True for user information, and False for not fetching user info. A string type is returned from this function - the API response.
 
 2. **setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)** -
+This function sets new data in the Game Jolt data store facility for your game. This function takes 3 arguments, "key", "userInfo" and "data". The first argument you assign the key of the data item, you would like to set; this is a String type. The second argument you specify whether you are setting data for specific users, so you assign True, for users and False to set this globally. And for the third argument you assign the data you wish to set, this should be a String type. A string type is returned from this function - the API response.
 
 3. **removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)** -
+This function removes data items from the data storage for your game. This function takes 2 arguments which are "key" and "userInfo". For the first argument you assign the data key for the data item, which will be a String type. And for the second argument you specify whether you wish to romove this data for a user or globally, True sets this to the user and False sets this to be removed globally for the game. A string type is returned from this function - the API response.
 
 4. **getKeysDataStorage(ByVal userInfo As Boolean) As Boolean** -
+This function gets data keys stored for your game in the data store. This function takes 1 argument, which takes a boolean type, which you assign True to get user data keys and False to get global data keys stored for your game. A boolean will be returned from this function, True if the data keys was successfully retrieved and False if they were not.
 
 Miscellaneous
 =============
 1. **New(ByVal private_key As String, ByVal gameID As Integer)** -
 This is the class constructor that takes 2 arguments. The first argument you assign a string value, whih is the private key for your game. The private key can be found at Game Jolt by going to "Dashboard" -> "Manage Your Games" then by clicking the game you are adding achievements and then "Achievements". Your private key should be on this page, under "Game info". And for the second argument you assign the game ID for you game found above your private key; makee sure this is an Integer value. This will be called first and set the following properties/class variables to their defaults, these are: GJ_private_key, GJ_gameID , GJ_UserName, GJ_Token, GJ_isActive, GJ_isLoggedIn, GJ_achieved.
-
-
