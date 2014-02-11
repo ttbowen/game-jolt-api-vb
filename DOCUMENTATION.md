@@ -94,14 +94,18 @@ This is a read only property that is used to to check whether the user is curren
 Trophies
 =============
 1. **fetchTrophy()** -
+This function is used to fetch trophies within the game. By using this function, you will return all trophies for your game. A string type is returned from this function - the API response. 
 
 2. **fetchTrophy(ByVal value As Object)** -
+This is an overloaded function of "fetchTrophy()" which is used to fetch trophies within the game. This function will accept one argument. If you assign True to this argument it will return all achieved trophies in the game and if you assign False it will return all unachieved trophies instead. And if you assign the trophy ID - Integer number then that particular trophy will be returned.  A string type is returned from this function - the API response.
 
 3. **add_TrophyAchieve(ByVal trophyID As Integer)** -
+This function achieves a trophy for the user playing the game. To use this function you just pass the trophy ID you wish to be achieved into it's only argument "trophyID".
 
 Highscores
 =============
-1. **fetchScores(ByVa*l userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)**
+1. **fetchScores(ByVal userInfo As Boolean, ByVal limit As Integer, ByVal tableID As Integer)**
+
 
 2. **addScores(ByVal score As Integer, ByVal sort As Integer, ByVal Guest As Boolean, ByVal extraData As String, ByVal tableID As Integer)**
 
