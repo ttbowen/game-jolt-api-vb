@@ -755,7 +755,7 @@ Public Class GJ_Achievement
         GJ_Signature = data_URL_temp
         Signature = GetSignature()
 
-        data_URL += "&" & "signature=" & GJ_Signature
+        data_URL += "&" & "signature=" & Signature
 
         Return data_URL
     End Function
