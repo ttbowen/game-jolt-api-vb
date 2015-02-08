@@ -691,16 +691,16 @@ Public Class GJ_Achievement
 
     ' *** Get the URL call for fetching data keys from the data store ***
     ' Note: You do not need to call this function, this is used to return the URL for "fetchDataStorage"
-    Public Function fetchDataStorageURL(ByVal key As String, ByVal userInfo As Boolean) As String
+    Public Function fetchDataStorageURL(ByVal userKey As String, ByVal userInfo As Boolean) As String
 
         Dim data_URL_temp As String
         Dim data_URL As String
         Dim Signature As String
 
         data_URL_temp = GJ_URL & "/data-store/?format=dump" & "&" & "game_id=" & CStr(GJ_gameID) & "&" & _
-            "key=" & key
+            "key=" & userKey
         data_URL = GJ_URL & "/data-store/?format=dump" & "&" & "game_id=" & CStr(GJ_gameID) & "&" & _
-            "key=" & key
+            "key=" & userKey
         ' Fetch data items for users only
         If userInfo = True Then
             data_URL_temp += "&" & "username=" & GJ_UserName & "&" & "user_token=" & GJ_Token
@@ -717,10 +717,10 @@ Public Class GJ_Achievement
 
     '*** Use this function to fetch data stored on GJ servers ***
     ' To fetch specific user data, then have userInfo as True
-    Public Function fetchDataStorage(ByVal key As String, ByVal userInfo As Boolean)
+    Public Function fetchDataStorage(ByVal userKey As String, ByVal userInfo As Boolean)
 
         Dim handleRequest As WebRequest
-        handleRequest = WebRequest.Create(fetchDataStorageURL(key, userInfo))
+        handleRequest = WebRequest.Create(fetchDataStorageURL(userKey, userInfo))
 
         Dim stream As Stream
         stream = handleRequest.GetResponse.GetResponseStream()
@@ -734,15 +734,15 @@ Public Class GJ_Achievement
 
     ' *** Get the URL call to set data storage ***
     ' Note: You do not need to call this function, this returns the URL for "setDataStorage"
-    Public Function setDataStorageURL(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String) As String
+    Public Function setDataStorageURL(ByVal userKey As String, ByVal userInfo As Boolean, ByVal data As String) As String
 
         Dim data_URL_temp As String
         Dim data_URL As String
         Dim Signature As String
 
-        data_URL_temp = GJ_URL & "/data-store/set/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & key _
+        data_URL_temp = GJ_URL & "/data-store/set/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & userKey _
             & "&" & "data=" & data
-        data_URL = GJ_URL & "/data-store/set/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & key _
+        data_URL = GJ_URL & "/data-store/set/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & userKey _
         & "&" & "data=" & data
 
         ' Store data items for users only
@@ -762,10 +762,10 @@ Public Class GJ_Achievement
 
     ' *** Set data in the data storage ***
     ' To set specific data within the data store, have userInfo as True
-    Public Function setDataStorage(ByVal key As String, ByVal userInfo As Boolean, ByVal data As String)
+    Public Function setDataStorage(ByVal userKey As String, ByVal userInfo As Boolean, ByVal data As String)
 
         Dim handleRequest As WebRequest
-        handleRequest = WebRequest.Create(setDataStorageURL(key, userInfo, data))
+        handleRequest = WebRequest.Create(setDataStorageURL(userKey, userInfo, data))
 
         Dim stream As Stream
         stream = handleRequest.GetResponse.GetResponseStream()
@@ -779,14 +779,14 @@ Public Class GJ_Achievement
 
     ' *** Get the URL call to remove data storage keys ***
     ' Note: You do not need to call this function, this returns the URL for "removeDataStorage"
-    Public Function removeDataStorageURL(ByVal key As String, ByVal userInfo As Boolean) As String
+    Public Function removeDataStorageURL(ByVal userKey As String, ByVal userInfo As Boolean) As String
 
         Dim data_URL_temp As String
         Dim data_URL As String
         Dim Signature As String
 
-        data_URL_temp = GJ_URL & "/data-store/remove/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & key
-        data_URL = GJ_URL & "/data-store/remove/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & key
+        data_URL_temp = GJ_URL & "/data-store/remove/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & userKey
+        data_URL = GJ_URL & "/data-store/remove/?game_id=" & CStr(GJ_gameID) & "&" & "key=" & userKey
 
         ' Remove data items for users only
         If userInfo = True Then
@@ -805,10 +805,10 @@ Public Class GJ_Achievement
 
     ' *** This function removes current data in the data store for your game ***
     ' To remove specific user data in the data store, have userInfo as True
-    Public Function removeDataStorage(ByVal key As String, ByVal userInfo As Boolean)
+    Public Function removeDataStorage(ByVal userKey As String, ByVal userInfo As Boolean)
 
         Dim handleRequest As WebRequest
-        handleRequest = WebRequest.Create(removeDataStorageURL(key, userInfo))
+        handleRequest = WebRequest.Create(removeDataStorageURL(userKey, userInfo))
 
         Dim stream As Stream
         stream = handleRequest.GetResponse.GetResponseStream()
