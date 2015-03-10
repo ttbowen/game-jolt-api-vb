@@ -231,8 +231,10 @@ Public Class GJ_Achievement
 
         If InStr(1, response, "true", CompareMethod.Text) = 10 Then
             openSession()
+            GJ_isLoggedIn = True
             Return True
         Else
+            GJ_isLoggedIn = False
             Return False
         End If
 
