@@ -1,6 +1,6 @@
 Vb.net-GJ-api
 =============
-This class will allow you to implement trophies, highscores, data storage and game sessions into your games with the Gamejolt API with VB.net. 
+This library will allow you to implement trophies, highscores, data storage and game sessions into your games with the Gamejolt API in VB.net. 
 
 License
 =============
